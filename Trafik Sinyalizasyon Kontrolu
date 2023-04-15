@@ -1,0 +1,15 @@
+module TrafficLight(input wire clk, output reg [2:0] led);
+    reg [27:0] counter;    // zamanlayici
+    always @(posedge clk) begin
+        counter <= counter + 1; // sayaç++
+        
+        if (counter >= 24_000_000) // Kırmızı led 10 sn yak
+            led <= 3'b101;
+        else if (counter >= 26_000_000) // Mavi led 2 sn yak
+            led <= 3'b001;
+        else if (counter >= 31_000_000) begin // Yeşil led 2sn yak
+            led <= 3'b110;
+            counter <= 0;
+        end
+    end
+endmodule
